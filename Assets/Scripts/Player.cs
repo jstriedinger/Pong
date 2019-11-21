@@ -5,10 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] bool isPlayerone = false;
-    [SerializeField] float speed = 5f;
-    [SerializeField] GameObject ball;
 
-    bool gameStarted = false;
+    GameManager gameManager;
+    float speed = 5f;
+    float paddleSpeed = 5f;
+    bool hasBall = false;
+    GameObject gameBall;
     float topLimit;
     float bottomLimit;
 
@@ -17,56 +19,84 @@ public class Player : MonoBehaviour
     {
         topLimit = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)).y;
         bottomLimit = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y;
+        gameBall = GameObject.Find("Ball");
+        gameManager = FindObjectOfType<GameManager>();
+        speed = gameManager.speed;
+        paddleSpeed = gameManager.paddleSpeed;
+        if (isPlayerone)
+            hasBall = true;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameStarted && isPlayerone)
+        if(hasBall)
         {
-            ball.transform.position = transform.position + new Vector3(1f, 0,0);
+            if(isPlayerone)
+                gameBall.transform.position = transform.position + new Vector3(1f, 0,0);
+            else
+                gameBall.transform.position = transform.position + new Vector3(-1f, 0, 0);
         }
-        if(Input.GetKey(KeyCode.Space) && !gameStarted && isPlayerone)
+        if(Input.GetKey(KeyCode.Space) && hasBall)
         {
-            gameStarted = true;
-            ball.GetComponent<Rigidbody2D>().velocity = new Vector2(8f, 8f);
+            hasBall = false;
+            if(isPlayerone)
+                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(speed,speed);
+            else
+                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, -speed);
         }
 
         if(isPlayerone)
         {
-            if (transform.position.y  < topLimit - 1f)
+            if (transform.position.y  < topLimit - 1.5f)
             {
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    transform.Translate(transform.up * speed * Time.deltaTime);
+                    transform.Translate(transform.up * paddleSpeed * Time.deltaTime);
                 }
             }
-            if (transform.position.y > bottomLimit +1f)
+            if (transform.position.y > bottomLimit +1.5f)
             {
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    transform.Translate(transform.up * speed * Time.deltaTime * -1);
+                    transform.Translate(transform.up * paddleSpeed * Time.deltaTime * -1);
                 }
             }
             
         }
         else
         {
-            if (transform.position.y < topLimit - 1f)
+            if (transform.position.y < topLimit - 1.5f)
             {
                 if (Input.GetKey(KeyCode.W))
                 {
-                    transform.Translate(transform.up * speed * Time.deltaTime);
+                    transform.Translate(transform.up * paddleSpeed * Time.deltaTime);
                 }
             }
-            if (transform.position.y > bottomLimit + 1f)
+            if (transform.position.y > bottomLimit + 1.5f)
             {
                 if (Input.GetKey(KeyCode.S))
                 {
-                    transform.Translate(transform.up * speed * Time.deltaTime * -1);
+                    transform.Translate(transform.up * paddleSpeed * Time.deltaTime * -1);
                 }
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject ball = collision.gameObject;
+        if (ball.tag == "Ball")
+        {
+            Vector2 vel = ball.GetComponent<Rigidbody2D>().velocity;
+            ball.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x * -1, vel.y);
+
+        }
+    }
+
+    public void assignBall()
+    {
+        hasBall = true;
     }
 }

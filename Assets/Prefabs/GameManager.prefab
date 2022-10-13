@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4713333099769840726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4713333099769840724}
+  - component: {fileID: 4713333099769840727}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4713333099769840724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713333099769840726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 4, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4713333099769840727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713333099769840726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4655d0f70b2b74a8e8e279283946811c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  paddleSpeed: 8
+  maxScore: 5
+  scoreTxtP1: {fileID: 0}
+  scoreTxtP2: {fileID: 0}
+  paddleP1: {fileID: 0}
+  paddleP2: {fileID: 0}
+  gameBall: {fileID: 525864213954387461, guid: 9f8bbfeaa047144c0a68b258c0c72823, type: 3}
+  gameover: {fileID: 0}
+  timerCountdown: {fileID: 0}
+  timerImage: {fileID: 0}
+  winnerTxt: {fileID: 0}
+  countdownSFX: {fileID: 8300000, guid: a3751a560ed8c4275a8b7c760d4134ad, type: 3}

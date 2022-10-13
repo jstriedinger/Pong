@@ -16,15 +16,6 @@ public class wall : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        GameObject ball = collision.gameObject;
-        if(ball.tag == "Ball")
-        {
-            Vector2 vel = ball.GetComponent<Rigidbody2D>().velocity;
-            ball.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y * -1);
-
-        }
-    }
+    
 
 }

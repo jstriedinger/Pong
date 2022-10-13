@@ -95,8 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerone: 1
-  speed: 5
-  ball: {fileID: 0}
 --- !u!70 &4468301497576425247
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

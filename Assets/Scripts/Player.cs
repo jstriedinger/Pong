@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     {
         topLimit = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)).y;
         bottomLimit = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y;
-        gameBall = GameObject.Find("Ball");
         gameManager = FindObjectOfType<GameManager>();
         speed = gameManager.speed;
         paddleSpeed = gameManager.paddleSpeed;
@@ -42,9 +41,9 @@ public class Player : MonoBehaviour
         {
             hasBall = false;
             if(isPlayerone)
-                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(speed,speed);
+                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(speed * Time.fixedDeltaTime,speed * Time.fixedDeltaTime);
             else
-                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, -speed);
+                gameBall.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed * Time.fixedDeltaTime, -speed * Time.fixedDeltaTime);
         }
 
         if(isPlayerone)
@@ -84,19 +83,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void assignBall(GameObject _ball)
     {
-        GameObject ball = collision.gameObject;
-        if (ball.tag == "Ball")
-        {
-            Vector2 vel = ball.GetComponent<Rigidbody2D>().velocity;
-            ball.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x * -1, vel.y);
-
-        }
-    }
-
-    public void assignBall()
-    {
+        gameBall = Instantiate(_ball);
         hasBall = true;
     }
 }
